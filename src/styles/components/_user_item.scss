@@ -1,0 +1,45 @@
+.user_item_content {
+  display: flex;
+  background-color: white;
+  border: 1px;
+  :hover {
+    .user_item_name_delete {
+      display: block;
+    }
+  }
+}
+.user_item_name_content {
+  display: flex;
+
+  align-content: center;
+  width: 40%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  .user_item_content_photo {
+    .user_item_photo {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+    }
+  }
+  .user_item_name {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.user_item_description_content {
+  width: 60%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+}
+
+.user_item_name_delete {
+  color: #fab43d;
+  font-size: 12px;
+  display: none;
+}
