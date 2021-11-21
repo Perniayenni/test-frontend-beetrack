@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { setUsers } from "../actions/users";
 import { usersService } from "../services/apiServices";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ListUsers } from "../components/ListUsers";
 import { Search } from "../components/Search";
 import { ButtonCreateUser } from "../components/ButtonCreateUser";
 
 export const Home = () => {
   const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.users);
 
   useEffect(() => {
     usersService.index().then((response) => {

@@ -11,7 +11,7 @@ export const ListUsers = () => {
         <div className="list_users_description word_bold">Descripción</div>
       </div>
       {users.map((user) => (
-        <UserItem user={user} />
+        <UserItem key={user.id} user={user} />
       ))}
     </>
   );

@@ -24,6 +24,14 @@ function createService(plural) {
           return { error };
         });
     },
+    delete(id) {
+      return axios
+        .delete(`${BASEURL}/${plural}/${id}`)
+        .then((response) => new Promise((resolve) => resolve(response.data)))
+        .catch((error) => {
+          return { error };
+        });
+    },
   };
 }
 

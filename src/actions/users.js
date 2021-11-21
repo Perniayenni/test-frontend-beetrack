@@ -7,3 +7,7 @@ export const setUsers = (users) => {
 export const setLoading = (loading) => {
   return { type: types.loading, payload: { loading } };
 };
+
+export const deleteUser = (id) => {
+  return { type: types.deleteUser, payload: { id } };
+};
