@@ -34,6 +34,9 @@ export const ButtonCreateUser = () => {
       });
     } else {
       setWarning("Debe llenar todos los campos....");
+      setTimeout(() => {
+        setWarning("");
+      }, 3000);
     }
   };
 
