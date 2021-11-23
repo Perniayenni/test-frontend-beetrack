@@ -7,3 +7,37 @@
   font-size: 15px;
   margin-right: 5px;
 }
+
+input,
+textarea {
+  border: 1px solid #a1a4a5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 7px 60px 9px 15px;
+  background-color: #fff;
+  outline: none;
+}
+
+.button_create_user_dialog_content {
+  background-color: #f9f9f9;
+  width: 390px;
+}
+
+.button_create_user_dialog_form {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button_create_user_dialog_content_button_guardar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button_create_user_dialog_button_guardar {
+  margin-top: 20px;
+  width: 50%;
+  justify-content: center;
+  align-content: center;
+}

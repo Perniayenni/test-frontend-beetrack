@@ -11,3 +11,7 @@ export const setLoading = (loading) => {
 export const deleteUser = (id) => {
   return { type: types.deleteUser, payload: { id } };
 };
+
+export const addUser = (user) => {
+  return { type: types.addUser, payload: { user } };
+};

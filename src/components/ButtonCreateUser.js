@@ -1,22 +1,34 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-} from "@material-ui/core";
+import { Dialog, DialogContent, DialogTitle } from "@material-ui/core";
+import { useForm } from "../hooks/useForm";
+import { usersService } from "../services/apiServices";
+import { useDispatch } from "react-redux";
+import { addUser } from "../actions/users";
 
 export const ButtonCreateUser = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const initialState = { description: "", photo: "", name: "" };
+
+  const [formValues, handleInputChange, reset] = useForm(initialState);
+
+  const { description, photo, name } = formValues;
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSaveUser = () => {
+    usersService.create({ description, name, photo }).then((resp) => {
+      dispatch(addUser(resp));
+      reset(initialState);
+      handleClose();
+    });
   };
 
   return (
@@ -36,8 +48,46 @@ export const ButtonCreateUser = () => {
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           <span className="word_bold">Agregar nuevo contacto</span>
         </DialogTitle>
-        <DialogContent dividers></DialogContent>
-        <DialogActions></DialogActions>
+        <DialogContent dividers className="button_create_user_dialog_content">
+          <form className="button_create_user_dialog_form">
+            <label className="word_bold">
+              URL Imagen de perfil <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="photo"
+              value={photo}
+              onChange={handleInputChange}
+            />
+            <label className="word_bold">
+              Nombre <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleInputChange}
+            />
+            <label className="word_bold">
+              Descripción <span className="required">*</span>
+            </label>
+            <textarea
+              type="text"
+              name="description"
+              value={description}
+              onChange={handleInputChange}
+            />
+            <div className="button_create_user_dialog_content_button_guardar">
+              <button
+                onClick={handleSaveUser}
+                type="button"
+                className="button_create_user_dialog_button_guardar"
+              >
+                Guardar
+              </button>
+            </div>
+          </form>
+        </DialogContent>
       </Dialog>
     </>
   );

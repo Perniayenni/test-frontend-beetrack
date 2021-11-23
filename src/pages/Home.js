@@ -11,6 +11,7 @@ export const Home = () => {
   const { users } = useSelector((state) => state.users);
 
   useEffect(() => {
+    console.log("se actuaizao");
     usersService.index().then((response) => {
       dispatch(setUsers(response));
     });

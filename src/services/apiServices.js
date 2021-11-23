@@ -16,8 +16,10 @@ function createService(plural) {
     },
     create(params) {
       return axios
-        .post(`${BASEURL}/${plural}`, {
-          params,
+        .post(`${BASEURL}/${plural}`, params, {
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
         .then((response) => new Promise((resolve) => resolve(response.data)))
         .catch((error) => {

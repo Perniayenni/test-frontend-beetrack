@@ -15,8 +15,10 @@ export const usersReducer = (state = initialState, action) => {
       const newUsers = state.users.filter(
         (user) => user.id !== action.payload.id
       );
-      debugger;
       return { ...state, users: newUsers };
+    case types.addUser:
+      const usersNew = [...state.users, action.payload.user];
+      return { ...state, users: usersNew };
     default:
       return state;
   }
