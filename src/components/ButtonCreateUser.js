@@ -11,6 +11,7 @@ export const ButtonCreateUser = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const initialState = { description: "", photo: "", name: "" };
+  const [warning, setWarning] = useState("");
 
   const [formValues, handleInputChange, reset] = useForm(initialState);
 
@@ -24,11 +25,16 @@ export const ButtonCreateUser = () => {
   };
 
   const handleSaveUser = () => {
-    usersService.create({ description, name, photo }).then((resp) => {
-      dispatch(addUser(resp));
-      reset(initialState);
-      handleClose();
-    });
+    if (description && photo && name) {
+      usersService.create({ description, name, photo }).then((resp) => {
+        dispatch(addUser(resp));
+        reset(initialState);
+        handleClose();
+        setWarning("");
+      });
+    } else {
+      setWarning("Debe llenar todos los campos....");
+    }
   };
 
   return (
@@ -77,6 +83,7 @@ export const ButtonCreateUser = () => {
               value={description}
               onChange={handleInputChange}
             />
+            <span>{warning}</span>
             <div className="button_create_user_dialog_content_button_guardar">
               <button
                 onClick={handleSaveUser}
