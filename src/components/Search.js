@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import queryString from "query-string";
 import { usersService } from "../services/apiServices";
 import { setUsers } from "../actions/users";
@@ -12,17 +12,14 @@ export const Search = () => {
   const { q = "" } = queryString.parse(location.search);
   const [query, setquery] = useState(q);
   const dispatch = useDispatch();
+  const { page, limit } = useSelector((state) => state.users);
   let history = useHistory();
 
   useEffect(() => {
     if (query) {
-      usersService.index({ q: query }).then((resp) => {
-        dispatch(setUsers(resp));
-      });
+      dispatch(setUsers({ q: query }));
     } else {
-      usersService.index().then((response) => {
-        dispatch(setUsers(response));
-      });
+      dispatch(setUsers({ _page: page, _limit: limit }));
     }
   }, [q]);
 

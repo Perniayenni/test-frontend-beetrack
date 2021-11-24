@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { setUsers } from "../actions/users";
-import { usersService } from "../services/apiServices";
 import { useDispatch, useSelector } from "react-redux";
 import { ListUsers } from "../components/ListUsers";
 import { Search } from "../components/Search";
@@ -8,13 +7,10 @@ import { ButtonCreateUser } from "../components/ButtonCreateUser";
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.users);
+  const { limit } = useSelector((state) => state.users);
 
   useEffect(() => {
-    console.log("se actuaizao");
-    usersService.index().then((response) => {
-      dispatch(setUsers(response));
-    });
+    dispatch(setUsers({ _page: 1, _limit: limit }));
   }, []);
 
   return (

@@ -2,23 +2,19 @@ import { types } from "../types/types";
 
 const initialState = {
   users: [],
-  loading: false,
+  count: 0,
+  limit: 6,
+  page: 1,
 };
 
 export const usersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.setUsers:
+    case types.users:
       return { ...state, users: action.payload.users };
-    case types.loading:
-      return { ...state, loading: action.payload.loading };
-    case types.deleteUser:
-      const newUsers = state.users.filter(
-        (user) => user.id !== action.payload.id
-      );
-      return { ...state, users: newUsers };
-    case types.addUser:
-      const usersNew = [...state.users, action.payload.user];
-      return { ...state, users: usersNew };
+    case types.setCountUsers:
+      return { ...state, count: action.payload.count };
+    case types.setPageUsers:
+      return { ...state, page: action.payload.page };
     default:
       return state;
   }

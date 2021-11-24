@@ -7,16 +7,17 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { usersService } from "../services/apiServices";
-import { useDispatch } from "react-redux";
-import { deleteUser } from "../actions/users";
+import { useDispatch, useSelector } from "react-redux";
+import { setUsers } from "../actions/users";
 
 export const UserItem = ({ user }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const { limit } = useSelector((state) => state.users);
 
   const handleDeleteUser = () => {
     usersService.delete(user.id).then((response) => {
-      dispatch(deleteUser(user.id));
+      dispatch(setUsers({ _page: 1, _limit: limit }));
       setOpen(false);
     });
   };

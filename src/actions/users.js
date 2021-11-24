@@ -1,17 +1,26 @@
+import { usersService } from "../services/apiServices";
 import { types } from "../types/types";
 
-export const setUsers = (users) => {
-  return { type: types.setUsers, payload: { users } };
+export const setUsers = (params) => {
+  return (dispatch) => {
+    usersService.index().then((response) => {
+      dispatch(setCountUser(response));
+    });
+    usersService.index(params).then((response) => {
+      dispatch(users(response));
+    });
+  };
 };
 
-export const setLoading = (loading) => {
-  return { type: types.loading, payload: { loading } };
+export const setCountUser = (users) => {
+  return { type: types.setCountUsers, payload: { count: users.length } };
 };
 
-export const deleteUser = (id) => {
-  return { type: types.deleteUser, payload: { id } };
+export const setPageUser = (page) => {
+  return { type: types.setPageUsers, payload: { page: page } };
 };
 
-export const addUser = (user) => {
-  return { type: types.addUser, payload: { user } };
-};
+export const users = (users) => ({
+  type: types.users,
+  payload: { users },
+});

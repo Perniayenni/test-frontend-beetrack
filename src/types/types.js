@@ -1,6 +1,5 @@
 export const types = {
-  setUsers: "SetUsers",
-  deleteUser: "DeleteUser",
-  addUser: "AddUser",
-  loading: "Loading",
+  users: "Users",
+  setCountUsers: "SetCountUsers",
+  setPageUsers: "SetPageUsers",
 };

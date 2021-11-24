@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@material-ui/core";
 import { useForm } from "../hooks/useForm";
 import { usersService } from "../services/apiServices";
-import { useDispatch } from "react-redux";
-import { addUser } from "../actions/users";
+import { useDispatch, useSelector } from "react-redux";
+import { setUsers } from "../actions/users";
 
 export const ButtonCreateUser = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const initialState = { description: "", photo: "", name: "" };
+  const { limit, page } = useSelector((state) => state.users);
   const [warning, setWarning] = useState("");
 
   const [formValues, handleInputChange, reset] = useForm(initialState);
@@ -27,7 +28,7 @@ export const ButtonCreateUser = () => {
   const handleSaveUser = () => {
     if (description && photo && name) {
       usersService.create({ description, name, photo }).then((resp) => {
-        dispatch(addUser(resp));
+        dispatch(setUsers({ _page: page, _limit: limit }));
         reset(initialState);
         handleClose();
         setWarning("");
